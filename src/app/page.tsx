@@ -15,10 +15,12 @@ export default function Home() {
         complexExamples: string[];
     } | null>(null);
     const [loading, setLoading] = useState(false);
+    const [source, setSource] = useState("");
 
     const handleRandom = () => {
         const random = incorrectSentences[Math.floor(Math.random() * incorrectSentences.length)];
         setSentence(random.text);
+        setSource(random.source);
         setResult(null);
     };
 
@@ -69,6 +71,11 @@ export default function Home() {
                         {loading ? <Loader2 className="animate-spin" /> : 'Correct'}
                     </Button>
                 </div>
+                {
+                    source && (
+                        <p className='px-4 py-2 text-gray-500 font-semibold text-sm border rounded w-fit '>{source}</p>
+                    )
+                }
 
                 {result && (
                     <CardContent className="bg-white rounded-xl p-4 shadow-sm border space-y-4">
