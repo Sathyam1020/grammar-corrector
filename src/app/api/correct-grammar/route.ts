@@ -5,8 +5,6 @@ const openai = new OpenAI({
     apiKey:process.env.OPENAI_KEY
 });
 
-console.log("key:", process.env.OPENAI_KEY)
-
 export async function POST(req: NextRequest) {
     const { sentence } = await req.json();
 
@@ -34,7 +32,7 @@ export async function POST(req: NextRequest) {
             complexExamples: parsed.complexExamples || []
         });
     } catch (e) {
-        console.error("❌ Failed to parse GPT response as JSON. Raw content:", raw);
+        console.error("❌ Failed to parse GPT response as JSON. Raw content:", e);
         return NextResponse.json({
             corrected: '',
             explanation: 'Failed to parse response from AI.',
